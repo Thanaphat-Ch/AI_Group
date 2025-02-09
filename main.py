@@ -5,6 +5,12 @@ import joblib
 from sklearn.tree import DecisionTreeClassifier
 #pip install streamlit scikit-learn numpy pandas joblib
 
+st.set_page_config(
+    page_title="Ex-stream-ly Cool App",
+    page_icon="🌱",
+)
+
+
 # โหลดข้อมูลตัวอย่างสำหรับการฝึกโมเดล
 data = {
     'temperature': [25, 30, 22, 35, 28, 32, 20, 27, 33, 29],
@@ -31,17 +37,17 @@ model = joblib.load('crop_model.pkl')
 
 # UI ด้วย Streamlit
 st.title("🌱 ระบบคาดการณ์พืชที่เหมาะสม")
-st.write("กรอกค่าตัวแปรด้านล่างเพื่อทำนายพืชที่เหมาะสม")
+st.subheader("กรอกค่าตัวแปรด้านล่างเพื่อทำนายพืชที่เหมาะสม")
 
 # รับค่าจากผู้ใช้
 col1, col2 = st.columns(2)
 with col1:
-    temperature = st.number_input("อุณหภูมิ (°C)", min_value=10, max_value=50, value=30)
-    humidity = st.number_input("ความชื้น (%)", min_value=10, max_value=100, value=50)
-    rainfall = st.number_input("ปริมาณฝน (mm)", min_value=0, max_value=1000, value=200)
+    temperature = st.number_input("🌡️ อุณหภูมิ (°C)", min_value=10, max_value=50, value=30)
+    humidity = st.number_input("💦 ความชื้น (%)", min_value=10, max_value=100, value=50)
+    rainfall = st.number_input("🌧️ ปริมาณฝน (mm)", min_value=0, max_value=1000, value=200)
 with col2:
-    soil_pH = st.number_input("ค่า pH ของดิน", min_value=4.0, max_value=9.0, value=6.5)
-    soil_moisture = st.number_input("ความชื้นในดิน (%)", min_value=10, max_value=100, value=40)
+    soil_pH = st.number_input("🧪 ค่า pH ของดิน", min_value=4.0, max_value=9.0, value=6.5)
+    soil_moisture = st.number_input("💧 ความชื้นในดิน (%)", min_value=10, max_value=100, value=40)
 
 if st.button("🔍 ทำนายพืชที่เหมาะสม"):
     user_input = np.array([[temperature, humidity, rainfall, soil_pH, soil_moisture]])
